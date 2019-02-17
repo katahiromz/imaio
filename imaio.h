@@ -4,7 +4,7 @@
 /*****************************************************************************/
 
 #ifndef KATAHIROMZ_IMAIO_H_
-#define KATAHIROMZ_IMAIO_H_ 0x004   /* Version 0.4 */
+#define KATAHIROMZ_IMAIO_H_ 0x005   /* Version 0.5 */
 
 /*****************************************************************************/
 
@@ -359,14 +359,14 @@ IMAIO_API void IIAPI
 /*****************************************************************************/
 /* Windows bitmap */
 
-IMAIO_API HBITMAP IIAPI ii_bmp_load_a(const char *pszFileName, float *dpi ii_optional);
-IMAIO_API HBITMAP IIAPI ii_bmp_load_w(const wchar_t *pszFileName, float *dpi ii_optional);
+IMAIO_API HBITMAP IIAPI ii_bmp_load_a(const char *filename, float *dpi ii_optional);
+IMAIO_API HBITMAP IIAPI ii_bmp_load_w(const wchar_t *filename, float *dpi ii_optional);
 IMAIO_API HBITMAP IIAPI ii_bmp_load_common(HANDLE hFile, HBITMAP hbm, float *dpi);
 
 IMAIO_API bool IIAPI
-ii_bmp_save_a(const char *pszFileName, HBITMAP hbm, float dpi ii_optional);
+ii_bmp_save_a(const char *filename, HBITMAP hbm, float dpi ii_optional);
 IMAIO_API bool IIAPI
-ii_bmp_save_w(const wchar_t *pszFileName, HBITMAP hbm, float dpi ii_optional);
+ii_bmp_save_w(const wchar_t *filename, HBITMAP hbm, float dpi ii_optional);
 IMAIO_API bool IIAPI
 ii_bmp_save_common(HANDLE hFile, HBITMAP hbm, float dpi);
 
@@ -374,8 +374,8 @@ ii_bmp_save_common(HANDLE hFile, HBITMAP hbm, float dpi);
  *  ex) HBITMAP hbm = ii_bmp_load_res(hInst, MAKEINTRESOURCE(1));
  *      for resource (1 BITMAP "myfile.bmp")
  */
-IMAIO_API HBITMAP IIAPI ii_bmp_load_res_a(HMODULE hInstance, const char *pszResName);
-IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *pszResName);
+IMAIO_API HBITMAP IIAPI ii_bmp_load_res_a(HMODULE hInstance, const char *res_name);
+IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *res_name);
 
 #ifdef UNICODE
     #define ii_bmp_load ii_bmp_load_w
@@ -401,16 +401,16 @@ IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *pszR
     #include "jpeglib.h"
     #include "jerror.h"
     #undef boolean
-    IMAIO_API HBITMAP IIAPI ii_jpg_load_a(const char *pszFileName, float *dpi ii_optional);
-    IMAIO_API HBITMAP IIAPI ii_jpg_load_w(const wchar_t *pszFileName, float *dpi ii_optional);
+    IMAIO_API HBITMAP IIAPI ii_jpg_load_a(const char *filename, float *dpi ii_optional);
+    IMAIO_API HBITMAP IIAPI ii_jpg_load_w(const wchar_t *filename, float *dpi ii_optional);
 
     IMAIO_API bool IIAPI
-    ii_jpg_save_a(const char *pszFileName, HBITMAP hbm,
+    ii_jpg_save_a(const char *filename, HBITMAP hbm,
                   int quality ii_optional_(100),
                   bool progression ii_optional,
                   float dpi ii_optional);
     IMAIO_API bool IIAPI
-    ii_jpg_save_w(const wchar_t *pszFileName, HBITMAP hbm,
+    ii_jpg_save_w(const wchar_t *filename, HBITMAP hbm,
                   int quality ii_optional_(100),
                   bool progression ii_optional,
                   float dpi ii_optional);
@@ -435,16 +435,16 @@ IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *pszR
 
 #ifdef HAVE_GIF
     #include "gif_lib.h"
-    IMAIO_API HBITMAP IIAPI ii_gif_load_8bpp_a(const char *pszFileName, int *pi_trans ii_optional);
-    IMAIO_API HBITMAP IIAPI ii_gif_load_8bpp_w(const wchar_t *pszFileName, int *pi_trans ii_optional);
-    IMAIO_API HBITMAP IIAPI ii_gif_load_32bpp_a(const char *pszFileName);
-    IMAIO_API HBITMAP IIAPI ii_gif_load_32bpp_w(const wchar_t *pszFileName);
+    IMAIO_API HBITMAP IIAPI ii_gif_load_8bpp_a(const char *filename, int *pi_trans ii_optional);
+    IMAIO_API HBITMAP IIAPI ii_gif_load_8bpp_w(const wchar_t *filename, int *pi_trans ii_optional);
+    IMAIO_API HBITMAP IIAPI ii_gif_load_32bpp_a(const char *filename);
+    IMAIO_API HBITMAP IIAPI ii_gif_load_32bpp_w(const wchar_t *filename);
 
     IMAIO_API bool IIAPI
-    ii_gif_save_a(const char *pszFileName, HBITMAP hbm8bpp,
+    ii_gif_save_a(const char *filename, HBITMAP hbm8bpp,
                   const int *pi_trans ii_optional);
     IMAIO_API bool IIAPI
-    ii_gif_save_w(const wchar_t *pszFileName, HBITMAP hbm8bpp,
+    ii_gif_save_w(const wchar_t *filename, HBITMAP hbm8bpp,
                   const int *pi_trans ii_optional);
 
     /* load from memory */
@@ -459,17 +459,17 @@ IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *pszR
      *      for resource (1 GIF "myfile.gif")
      */
     IMAIO_API HBITMAP IIAPI
-    ii_gif_load_8bpp_res_a(HMODULE hInstance, const char *pszResName,
+    ii_gif_load_8bpp_res_a(HMODULE hInstance, const char *res_name,
                            int *pi_trans ii_optional);
     IMAIO_API HBITMAP IIAPI
-    ii_gif_load_8bpp_res_w(HMODULE hInstance, const wchar_t *pszResName,
+    ii_gif_load_8bpp_res_w(HMODULE hInstance, const wchar_t *res_name,
                            int *pi_trans ii_optional);
 
     IMAIO_API HBITMAP IIAPI
-    ii_gif_load_32bpp_res_a(HMODULE hInstance, const char *pszResName);
+    ii_gif_load_32bpp_res_a(HMODULE hInstance, const char *res_name);
 
     IMAIO_API HBITMAP IIAPI
-    ii_gif_load_32bpp_res_w(HMODULE hInstance, const wchar_t *pszResName);
+    ii_gif_load_32bpp_res_w(HMODULE hInstance, const wchar_t *res_name);
 
     #ifdef UNICODE
         #define ii_gif_load_8bpp ii_gif_load_8bpp_w
@@ -500,26 +500,26 @@ IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *pszR
 
 #ifdef HAVE_GIF
     IMAIO_API II_ANIGIF * IIAPI
-    ii_anigif_load_a(const char *pszFileName, II_FLAGS flags);
+    ii_anigif_load_a(const char *filename, II_FLAGS flags);
     IMAIO_API II_ANIGIF * IIAPI
-    ii_anigif_load_w(const wchar_t *pszFileName, II_FLAGS flags);
+    ii_anigif_load_w(const wchar_t *filename, II_FLAGS flags);
 
     IMAIO_API bool IIAPI
-    ii_anigif_save_a(const char *pszFileName, II_ANIGIF *anigif);
+    ii_anigif_save_a(const char *filename, II_ANIGIF *anigif);
 
     IMAIO_API bool IIAPI
-    ii_anigif_save_w(const wchar_t *pszFileName, II_ANIGIF *anigif);
+    ii_anigif_save_w(const wchar_t *filename, II_ANIGIF *anigif);
 
     IMAIO_API II_ANIGIF * IIAPI ii_anigif_load_mem(
         const void *pv, uint32_t cb, II_FLAGS flags);
 
     IMAIO_API II_ANIGIF * IIAPI
     ii_anigif_load_res_a(
-        HMODULE hInstance, const char *pszResName, II_FLAGS flags);
+        HMODULE hInstance, const char *res_name, II_FLAGS flags);
 
     IMAIO_API II_ANIGIF * IIAPI
     ii_anigif_load_res_w(
-        HMODULE hInstance, const wchar_t *pszResName, II_FLAGS flags);
+        HMODULE hInstance, const wchar_t *res_name, II_FLAGS flags);
 
     IMAIO_API void IIAPI
     ii_anigif_destroy(II_ANIGIF *anigif);
@@ -548,16 +548,16 @@ IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *pszR
     #include "zlib.h"
 
     IMAIO_API HBITMAP IIAPI
-    ii_png_load_a(const char *pszFileName, float *dpi ii_optional);
+    ii_png_load_a(const char *filename, float *dpi ii_optional);
 
     IMAIO_API HBITMAP IIAPI
-    ii_png_load_w(const wchar_t *pszFileName, float *dpi ii_optional);
+    ii_png_load_w(const wchar_t *filename, float *dpi ii_optional);
 
     IMAIO_API bool IIAPI
-    ii_png_save_a(const char *pszFileName, HBITMAP hbm, float dpi ii_optional);
+    ii_png_save_a(const char *filename, HBITMAP hbm, float dpi ii_optional);
 
     IMAIO_API bool IIAPI
-    ii_png_save_w(const wchar_t *pszFileName, HBITMAP hbm, float dpi ii_optional);
+    ii_png_save_w(const wchar_t *filename, HBITMAP hbm, float dpi ii_optional);
 
     /* load from memory */
     IMAIO_API HBITMAP IIAPI ii_png_load_mem(const void *pv, uint32_t cb);
@@ -567,10 +567,10 @@ IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *pszR
      *      for resource (1 PNG "myfile.png")
      */
     IMAIO_API HBITMAP IIAPI
-    ii_png_load_res_a(HMODULE hInstance, const char *pszResName);
+    ii_png_load_res_a(HMODULE hInstance, const char *res_name);
 
     IMAIO_API HBITMAP IIAPI
-     ii_png_load_res_w(HMODULE hInstance, const wchar_t *pszResName);
+     ii_png_load_res_w(HMODULE hInstance, const wchar_t *res_name);
 
     #ifdef UNICODE
         #define ii_png_load ii_png_load_w
@@ -592,27 +592,27 @@ IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *pszR
 #ifdef HAVE_PNG
     #ifdef PNG_APNG_SUPPORTED
         IMAIO_API II_APNG * IIAPI
-        ii_apng_load_a(const char *pszFileName,
+        ii_apng_load_a(const char *filename,
                        II_FLAGS flags ii_optional_(II_FLAG_USE_SCREEN));
 
         IMAIO_API II_APNG * IIAPI
-        ii_apng_load_w(const wchar_t *pszFileName,
+        ii_apng_load_w(const wchar_t *filename,
                        II_FLAGS flags ii_optional_(II_FLAG_USE_SCREEN));
 
         IMAIO_API II_APNG * IIAPI
-        ii_apng_load_res_a(HMODULE hInstance, const char *pszResName,
+        ii_apng_load_res_a(HMODULE hInstance, const char *res_name,
                            II_FLAGS flags ii_optional_(II_FLAG_USE_SCREEN));
 
         IMAIO_API II_APNG * IIAPI
-        ii_apng_load_res_w(HMODULE hInstance, const wchar_t *pszResName,
+        ii_apng_load_res_w(HMODULE hInstance, const wchar_t *res_name,
                            II_FLAGS flags ii_optional_(II_FLAG_USE_SCREEN));
 
         IMAIO_API II_APNG * IIAPI
         ii_apng_load_mem(const void *pv, uint32_t cb,
                          II_FLAGS flags ii_optional_(II_FLAG_USE_SCREEN));
 
-        IMAIO_API bool IIAPI ii_apng_save_a(const char *pszFileName, II_APNG *apng);
-        IMAIO_API bool IIAPI ii_apng_save_w(const wchar_t *pszFileName, II_APNG *apng);
+        IMAIO_API bool IIAPI ii_apng_save_a(const char *filename, II_APNG *apng);
+        IMAIO_API bool IIAPI ii_apng_save_w(const wchar_t *filename, II_APNG *apng);
 
         IMAIO_API void IIAPI ii_apng_destroy(II_APNG *apng);
 
@@ -650,16 +650,16 @@ IMAIO_API HBITMAP IIAPI ii_bmp_load_res_w(HMODULE hInstance, const wchar_t *pszR
     #include "tiffio.h"
 
     IMAIO_API HBITMAP IIAPI
-    ii_tif_load_a(const char *pszFileName, float *dpi ii_optional);
+    ii_tif_load_a(const char *filename, float *dpi ii_optional);
 
     IMAIO_API HBITMAP IIAPI
-    ii_tif_load_w(const wchar_t *pszFileName, float *dpi ii_optional);
+    ii_tif_load_w(const wchar_t *filename, float *dpi ii_optional);
 
     IMAIO_API bool IIAPI
-    ii_tif_save_a(const char *pszFileName, HBITMAP hbm, float dpi ii_optional);
+    ii_tif_save_a(const char *filename, HBITMAP hbm, float dpi ii_optional);
 
     IMAIO_API bool IIAPI
-    ii_tif_save_w(const wchar_t *pszFileName, HBITMAP hbm, float dpi ii_optional);
+    ii_tif_save_w(const wchar_t *filename, HBITMAP hbm, float dpi ii_optional);
 
     #ifdef UNICODE
         #define ii_tif_load ii_tif_load_w
@@ -689,32 +689,32 @@ typedef enum II_IMAGE_TYPE
 } II_IMAGE_TYPE;
 
 /* image type from path name or dotext */
-IMAIO_API II_IMAGE_TYPE IIAPI ii_image_type_from_path_name_a(const char * pszFileName);
-IMAIO_API II_IMAGE_TYPE IIAPI ii_image_type_from_path_name_w(const wchar_t *pszFileName);
-IMAIO_API II_IMAGE_TYPE IIAPI ii_image_type_from_dotext_a(const char * pchDotExt);
-IMAIO_API II_IMAGE_TYPE IIAPI ii_image_type_from_dotext_w(const wchar_t *pchDotExt);
+IMAIO_API II_IMAGE_TYPE IIAPI ii_image_type_from_path_name_a(const char * filename);
+IMAIO_API II_IMAGE_TYPE IIAPI ii_image_type_from_path_name_w(const wchar_t *filename);
+IMAIO_API II_IMAGE_TYPE IIAPI ii_image_type_from_dotext_a(const char * dot_ext);
+IMAIO_API II_IMAGE_TYPE IIAPI ii_image_type_from_dotext_w(const wchar_t *dot_ext);
 
 /* wildcards from image type */
 IMAIO_API const char *      IIAPI ii_wildcards_from_image_type_a(II_IMAGE_TYPE type);
 IMAIO_API const wchar_t *   IIAPI ii_wildcards_from_image_type_w(II_IMAGE_TYPE type);
 
 /* file title and dotext */
-IMAIO_API const char *      IIAPI ii_find_file_title_a(const char * pszPath);
-IMAIO_API const wchar_t *   IIAPI ii_find_file_title_w(const wchar_t *pszPath);
-IMAIO_API const char *      IIAPI ii_find_dotext_a(const char * pszPath);
-IMAIO_API const wchar_t *   IIAPI ii_find_dotext_w(const wchar_t *pszPath);
+IMAIO_API const char *      IIAPI ii_find_file_title_a(const char * path);
+IMAIO_API const wchar_t *   IIAPI ii_find_file_title_w(const wchar_t *path);
+IMAIO_API const char *      IIAPI ii_find_dotext_a(const char * path);
+IMAIO_API const wchar_t *   IIAPI ii_find_dotext_w(const wchar_t *path);
 
 /* MIME */
-IMAIO_API const char *      IIAPI ii_mime_from_path_name_a(const char * pszFileName);
-IMAIO_API const wchar_t *   IIAPI ii_mime_from_path_name_w(const wchar_t *pszFileName);
-IMAIO_API const char *      IIAPI ii_mime_from_dotext_a(const char * pchDotExt);
-IMAIO_API const wchar_t *   IIAPI ii_mime_from_dotext_w(const wchar_t *pchDotExt);
-IMAIO_API const char *      IIAPI ii_dotext_from_mime_a(const char * pszMIME);
-IMAIO_API const wchar_t *   IIAPI ii_dotext_from_mime_w(const wchar_t *pszMIME);
+IMAIO_API const char *      IIAPI ii_mime_from_path_name_a(const char * filename);
+IMAIO_API const wchar_t *   IIAPI ii_mime_from_path_name_w(const wchar_t *filename);
+IMAIO_API const char *      IIAPI ii_mime_from_dotext_a(const char * dot_ext);
+IMAIO_API const wchar_t *   IIAPI ii_mime_from_dotext_w(const wchar_t *dot_ext);
+IMAIO_API const char *      IIAPI ii_dotext_from_mime_a(const char * mime);
+IMAIO_API const wchar_t *   IIAPI ii_dotext_from_mime_w(const wchar_t *mime);
 IMAIO_API const char *      IIAPI ii_mime_from_image_type_a(II_IMAGE_TYPE type);
 IMAIO_API const wchar_t *   IIAPI ii_mime_from_image_type_w(II_IMAGE_TYPE type);
-IMAIO_API II_IMAGE_TYPE IIAPI   ii_image_type_from_mime_a(const char * pszMIME);
-IMAIO_API II_IMAGE_TYPE IIAPI   ii_image_type_from_mime_w(const wchar_t *pszMIME);
+IMAIO_API II_IMAGE_TYPE IIAPI   ii_image_type_from_mime_a(const char * mime);
+IMAIO_API II_IMAGE_TYPE IIAPI   ii_image_type_from_mime_w(const wchar_t *mime);
 
 /* make a filter string for "Open" / "Save As" dialog */
 IMAIO_API char *        IIAPI ii_make_filter_a(char *     pszFilter);
