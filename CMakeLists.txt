@@ -84,10 +84,18 @@ endif()
 
 # add library
 add_library(imaio STATIC imaio.c gif.c jpg.c png.c tif.c)
+
 target_include_directories(imaio PRIVATE
-    ${GIF_INCLUDE_DIR} ${JPEG_INCLUDE_DIRS} ${PNG_INCLUDE_DIRS} ${TIFF_INCLUDE_DIRS})
+    ${GIF_INCLUDE_DIR}
+    ${JPEG_INCLUDE_DIRS}
+    ${PNG_INCLUDE_DIRS}
+    ${TIFF_INCLUDE_DIRS})
+
 target_link_libraries(imaio PRIVATE
-    ${GIF_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${TIFF_LIBRARIES})
+    ${GIF_LIBRARIES}
+    ${JPEG_LIBRARIES}
+    ${PNG_LIBRARIES}
+    ${TIFF_LIBRARIES})
 
 # add test program
 add_executable(imaio_test imaio_test.c)
