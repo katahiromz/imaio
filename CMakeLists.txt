@@ -108,7 +108,7 @@ target_link_libraries(imaio PRIVATE
 add_executable(imaio_test tests/imaio_test.c)
 target_link_libraries(imaio_test PRIVATE imaio)
 
-# add test
-add_test(NAME imaio_test COMMAND imaio_test WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+## add test
+#add_test(NAME imaio_test COMMAND imaio_test WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 ##############################################################################
