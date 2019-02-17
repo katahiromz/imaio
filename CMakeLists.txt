@@ -134,6 +134,7 @@ target_link_libraries(imaio_test_1 PRIVATE imaio)
 # add test program #2
 add_executable(imaio_test_2 tests/imaio_test.c)
 target_link_libraries(imaio_test_2 PRIVATE imaio-dll)
+target_compile_definitions(imaio_test_2 PRIVATE -DIMAIO_DLL)
 
 ## add test
 #add_test(NAME imaio_test_1 COMMAND imaio_test_1 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
