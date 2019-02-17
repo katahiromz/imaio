@@ -179,5 +179,55 @@ int main(void)
     }
 #endif
 
+#if defined(HAVE_GIF) && defined(HAVE_PNG)
+    puts("generate gif anime");
+    {
+        HDC hDC = NULL;
+        int num_frames = 10;
+        II_ANIGIF *anigif = calloc(1, sizeof(II_ANIGIF));
+        anigif->flags = 0;
+        anigif->width = 100;
+        anigif->height = 100;
+        anigif->global_palette = ii_palette_fixed(false);
+        anigif->iBackground = -1;
+        anigif->num_frames = num_frames;
+        anigif->frames = calloc(sizeof(II_ANIGIF_FRAME), num_frames);
+        anigif->loop_count = 0;
+        hDC = CreateCompatibleDC(NULL);
+        if (hDC)
+        {
+            int i;
+            TCHAR szText[32];
+            for (i = 0; i < num_frames; ++i)
+            {
+                HBITMAP hbm = ii_create_8bpp_solid(100, 100, anigif->global_palette, 0);
+                if (hbm)
+                {
+                    RECT rc = { 0, 0, 100, 100 };
+                    HGDIOBJ hbmOld = SelectObject(hDC, hbm);
+                    wsprintf(szText, TEXT("%u"), i + 1);
+                    SetTextColor(hDC, 0);
+                    SetBkColor(hDC, RGB(255, 255, 255));
+                    SetBkMode(hDC, OPAQUE);
+                    DrawText(hDC, szText, 1, &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+                    SelectObject(hDC, hbmOld);
+
+                    anigif->frames[i].x = 0;
+                    anigif->frames[i].y = 0;
+                    anigif->frames[i].width = anigif->width;
+                    anigif->frames[i].height = anigif->height;
+                    anigif->frames[i].iTransparent = -1;
+                    anigif->frames[i].disposal = 0;
+                    anigif->frames[i].delay = 1000;
+                    anigif->frames[i].hbmPart = hbm;
+                }
+            }
+            DeleteDC(hDC);
+        }
+        ii_anigif_save(_T("tests/images/generated-save.gif"), anigif);
+        ii_anigif_destroy(anigif);
+    }
+#endif
+
     return 0;
 }
