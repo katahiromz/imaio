@@ -4,7 +4,7 @@
 /*****************************************************************************/
 
 #ifndef KATAHIROMZ_IMAIO_H_
-#define KATAHIROMZ_IMAIO_H_ 0x005   /* Version 0.5 */
+#define KATAHIROMZ_IMAIO_H_ 0x006   /* Version 0.6 */
 
 /*****************************************************************************/
 
@@ -128,7 +128,7 @@ typedef struct II_PALETTE
 typedef struct II_ANIGIF_FRAME
 {
     int                 x, y;           /* position */
-    int                 width, height;  /* size */
+    int                 width, height;  /* pixel size */
     int                 iTransparent;   /* -1 if not transparent */
     int                 disposal;       /* gif disposal method */
     int                 delay;          /* in milliseconds */
@@ -142,9 +142,8 @@ typedef struct II_ANIGIF_FRAME
 /* animated gif */
 typedef struct II_ANIGIF
 {
-    II_FLAGS            flags;
-    int                 width;
-    int                 height;
+    II_FLAGS            flags;          /* II_FLAG_* */
+    int                 width, height;  /* pixel size */
     II_PALETTE *        global_palette; /* global color table */
     int                 iBackground;    /* background color index */
     int                 num_frames;     /* the number of frames */
@@ -158,13 +157,12 @@ typedef struct II_APNG_FRAME
 {
     HBITMAP         hbmScreen;      /* must be 32bpp or NULL */
     HBITMAP         hbmPart;        /* must be 32bpp */
-    uint32_t        x_offset;
-    uint32_t        y_offset;
-    uint32_t        width;
-    uint32_t        height;
+    uint32_t        x_offset;       /* horizontal position */
+    uint32_t        y_offset;       /* vertical position */
+    uint32_t        width, height;  /* pixel size */
     uint32_t        delay;          /* in milliseconds */
-    uint8_t         dispose_op;
-    uint8_t         blend_op;
+    uint8_t         dispose_op;     /* PNG_DISPOSE_OP_* */
+    uint8_t         blend_op;       /* PNG_BLEND_OP_* */
     void *          p_user;         /* user data pointer */
     size_t          i_user;         /* user data integer */
 } II_APNG_FRAME;
@@ -173,14 +171,13 @@ typedef struct II_APNG
 {
     II_APNG_FRAME * frames;         /* malloc'ed */
     HBITMAP         hbmDefault;     /* must be 32bpp or NULL */
-    uint32_t        width;
-    uint32_t        height;
+    uint32_t        width, height;  /* pixel size */
     uint32_t        num_frames;     /* number of frames */
     uint32_t        num_plays;      /* number of plays */
     void *          p_user;         /* user data pointer */
     size_t          i_user;         /* user data integer */
-    II_FLAGS        flags;
-    float           dpi;
+    II_FLAGS        flags;          /* II_FLAG_* */
+    float           dpi;            /* can be zero */
 } II_APNG;
 
 /*****************************************************************************/
