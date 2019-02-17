@@ -183,7 +183,7 @@ int main(void)
     puts("generate gif anime");
     {
         HDC hDC = NULL;
-        int num_frames = 10;
+        int num_frames = 9;
         II_ANIGIF *anigif = calloc(1, sizeof(II_ANIGIF));
         anigif->flags = 0;
         anigif->width = 100;
