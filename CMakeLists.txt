@@ -84,7 +84,7 @@ if (TIFF_FOUND)
     add_definitions(-DHAVE_TIFF)
 endif()
 
-# add library
+# add static library
 add_library(imaio STATIC
     src/imaio.c
     src/gif.c
@@ -99,6 +99,29 @@ target_include_directories(imaio PRIVATE
     ${TIFF_INCLUDE_DIRS})
 
 target_link_libraries(imaio PRIVATE
+    ${GIF_LIBRARIES}
+    ${JPEG_LIBRARIES}
+    ${PNG_LIBRARIES}
+    ${TIFF_LIBRARIES})
+
+# add shared library
+add_library(imaio-dll SHARED
+    src/imaio.c
+    src/gif.c
+    src/jpg.c
+    src/png.c
+    src/tif.c)
+set_target_properties(imaio-dll PROPERTIES OUTPUT_NAME "imaio")
+
+target_compile_definitions(imaio-dll PRIVATE -DIMAIO_DLL)
+
+target_include_directories(imaio-dll PRIVATE
+    ${GIF_INCLUDE_DIR}
+    ${JPEG_INCLUDE_DIRS}
+    ${PNG_INCLUDE_DIRS}
+    ${TIFF_INCLUDE_DIRS})
+
+target_link_libraries(imaio-dll PRIVATE
     ${GIF_LIBRARIES}
     ${JPEG_LIBRARIES}
     ${PNG_LIBRARIES}
