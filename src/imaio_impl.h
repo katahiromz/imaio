@@ -27,4 +27,13 @@ typedef struct tagII_BITMAPINFOEX
     #define LR_LOADREALSIZE 128
 #endif
 
+typedef struct II_MEMORY
+{
+    const uint8_t *     m_pb;           /* pointer to memory */
+    uint32_t            m_i;            /* reading position */
+    uint32_t            m_size;         /* memory size */
+    void *              p_user;         /* user data pointer */
+    size_t              i_user;         /* user data integer */
+} II_MEMORY;
+
 #endif  /* ndef IMAIO_IMPL_H_ */

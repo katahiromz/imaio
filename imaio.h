@@ -154,15 +154,6 @@ typedef struct II_ANIGIF
     size_t              i_user;         /* user data integer */
 } II_ANIGIF;
 
-typedef struct II_MEMORY
-{
-    const uint8_t *     m_pb;           /* pointer to memory */
-    uint32_t            m_i;            /* reading position */
-    uint32_t            m_size;         /* memory size */
-    void *              p_user;         /* user data pointer */
-    size_t              i_user;         /* user data integer */
-} II_MEMORY;
-
 typedef struct II_APNG_FRAME
 {
     HBITMAP         hbmScreen;      /* must be 32bpp or NULL */
