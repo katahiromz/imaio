@@ -179,7 +179,7 @@ int main(void)
     }
 #endif
 
-#if defined(HAVE_GIF) && defined(HAVE_PNG)
+#if defined(HAVE_GIF)
     puts("generate gif anime");
     {
         HDC hDC = NULL;
