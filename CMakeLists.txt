@@ -61,6 +61,8 @@ endif()
 
 ##############################################################################
 
+include_directories(.)
+
 find_package(GIF)
 if (GIF_FOUND)
     add_definitions(-DHAVE_GIF)
@@ -83,7 +85,12 @@ if (TIFF_FOUND)
 endif()
 
 # add library
-add_library(imaio STATIC imaio.c gif.c jpg.c png.c tif.c)
+add_library(imaio STATIC
+    src/imaio.c
+    src/gif.c
+    src/jpg.c
+    src/png.c
+    src/tif.c)
 
 target_include_directories(imaio PRIVATE
     ${GIF_INCLUDE_DIR}
@@ -98,7 +105,7 @@ target_link_libraries(imaio PRIVATE
     ${TIFF_LIBRARIES})
 
 # add test program
-add_executable(imaio_test imaio_test.c)
+add_executable(imaio_test tests/imaio_test.c)
 target_link_libraries(imaio_test PRIVATE imaio)
 
 # add test

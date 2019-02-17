@@ -14,7 +14,7 @@ int main(void)
 #ifdef HAVE_GIF
     puts("anigif --> gif");
     {
-        II_ANIGIF *anigif = ii_anigif_load(_T("earth.gif"), II_FLAG_USE_SCREEN);
+        II_ANIGIF *anigif = ii_anigif_load(_T("tests/images/earth.gif"), II_FLAG_USE_SCREEN);
         assert(anigif);
         printf("num_frames: %d\n", anigif->num_frames);
         printf("flags: %d\n", anigif->flags);
@@ -34,19 +34,19 @@ int main(void)
             printf("disposal: %d\n", frame->disposal);
             printf("delay: %d\n", frame->delay);
             printf("local_palette: %s\n", (frame->local_palette ? "present" : "none"));
-            sprintf(fname, "earth-frame-%02d-save.gif", i);
+            sprintf(fname, "tests/images/earth-frame-%02d-save.gif", i);
             ii_gif_save_a(fname, frame->hbmPart, &frame->iTransparent);
         }
         puts("anigif --> anigif");
         anigif->loop_count = 3;
         anigif->flags = II_FLAG_USE_SCREEN;
-        ii_anigif_save(_T("earth-save.gif"), anigif);
+        ii_anigif_save(_T("tests/images/earth-save.gif"), anigif);
 
 # if defined(HAVE_PNG)
         puts("anigif --> apng");
         {
             II_APNG *apng = ii_apng_from_anigif(anigif);
-            ii_apng_save(_T("earth-save.png"), apng);
+            ii_apng_save(_T("tests/images/earth-save.png"), apng);
             ii_apng_destroy(apng);
         }
 # endif
@@ -58,7 +58,7 @@ int main(void)
 #ifdef HAVE_PNG
     puts("apng --> png");
     {
-        II_APNG *apng = ii_apng_load(_T("apng.png"), II_FLAG_USE_SCREEN);
+        II_APNG *apng = ii_apng_load(_T("tests/images/apng.png"), II_FLAG_USE_SCREEN);
         printf("width: %d\n", apng->width);
         printf("height: %d\n", apng->height);
         printf("num_frames: %d\n", apng->num_frames);
@@ -73,21 +73,21 @@ int main(void)
             printf("height: %d\n", frame->height);
             if (frame->hbmScreen)
             {
-                sprintf(fname, "apng-screen-%03d-save.png", i);
+                sprintf(fname, "tests/images/apng-screen-%03d-save.png", i);
                 ii_png_save_a(fname, frame->hbmScreen, 0);
             }
-            sprintf(fname, "part-%03d-save.png", i);
+            sprintf(fname, "tests/images/part-%03d-save.png", i);
             ii_png_save_a(fname, frame->hbmPart, 0);
         }
 
         puts("apng --> apng");
-        ii_apng_save(_T("apng-save.png"), apng);
+        ii_apng_save(_T("tests/images/apng-save.png"), apng);
 
 # ifdef HAVE_GIF
         puts("apng --> anigif");
         {
             II_ANIGIF *anigif = ii_anigif_from_apng(apng, true);
-            ii_anigif_save(_T("apng-save.gif"), anigif);
+            ii_anigif_save(_T("tests/images/apng-save.gif"), anigif);
             ii_anigif_destroy(anigif);
         }
 # endif
@@ -98,20 +98,20 @@ int main(void)
 #ifdef HAVE_JPEG
     puts("jpeg --> jpeg");
     {
-        HBITMAP hbm = ii_jpg_load(_T("flower.jpg"), NULL);
-        ii_jpg_save(_T("flower-save.jpg"), hbm, 100, false, 0);
+        HBITMAP hbm = ii_jpg_load(_T("tests/images/flower.jpg"), NULL);
+        ii_jpg_save(_T("tests/images/flower-save.jpg"), hbm, 100, false, 0);
         ii_destroy(hbm);
     }
     puts("jpeg --> bmp");
     {
-        HBITMAP hbm = ii_jpg_load(_T("flower.jpg"), NULL);
-        ii_bmp_save(_T("flower-save.bmp"), hbm, 0);
+        HBITMAP hbm = ii_jpg_load(_T("tests/images/flower.jpg"), NULL);
+        ii_bmp_save(_T("tests/images/flower-save.bmp"), hbm, 0);
         ii_destroy(hbm);
     }
     puts("bmp --> jpeg");
     {
-        HBITMAP hbm = ii_bmp_load(_T("lena.bmp"), NULL);
-        ii_jpg_save(_T("lena-save.jpg"), hbm, 50, false, 0);
+        HBITMAP hbm = ii_bmp_load(_T("tests/images/lena.bmp"), NULL);
+        ii_jpg_save(_T("tests/images/lena-save.jpg"), hbm, 50, false, 0);
         ii_destroy(hbm);
     }
 #endif
@@ -119,20 +119,20 @@ int main(void)
 #ifdef HAVE_GIF
     puts("gif --> gif");
     {
-        HBITMAP hbm = ii_gif_load_8bpp(_T("sunflower.gif"), &i_trans);
-        ii_gif_save(_T("sunflower-save.gif"), hbm, 0);
+        HBITMAP hbm = ii_gif_load_8bpp(_T("tests/images/sunflower.gif"), &i_trans);
+        ii_gif_save(_T("tests/images/sunflower-save.gif"), hbm, 0);
         ii_destroy(hbm);
     }
     puts("gif --> bmp");
     {
-        HBITMAP hbm = ii_gif_load_8bpp(_T("sunflower.gif"), &i_trans);
-        ii_bmp_save(_T("sunflower-save.bmp"), hbm, 0);
+        HBITMAP hbm = ii_gif_load_8bpp(_T("tests/images/sunflower.gif"), &i_trans);
+        ii_bmp_save(_T("tests/images/sunflower-save.bmp"), hbm, 0);
         ii_destroy(hbm);
     }
     puts("gif --> gif");
     {
-        HBITMAP hbm = ii_gif_load_8bpp(_T("sunflower.gif"), &i_trans);
-        ii_gif_save(_T("sunflower-save.gif"), hbm, &i_trans);
+        HBITMAP hbm = ii_gif_load_8bpp(_T("tests/images/sunflower.gif"), &i_trans);
+        ii_gif_save(_T("tests/images/sunflower-save.gif"), hbm, &i_trans);
         ii_destroy(hbm);
     }
 #endif
@@ -140,20 +140,20 @@ int main(void)
 #ifdef HAVE_PNG
     puts("png --> png");
     {
-        HBITMAP hbm = ii_png_load(_T("glasses.png"), NULL);
-        ii_png_save(_T("glasses-save.png"), hbm, 0);
+        HBITMAP hbm = ii_png_load(_T("tests/images/glasses.png"), NULL);
+        ii_png_save(_T("tests/images/glasses-save.png"), hbm, 0);
         ii_destroy(hbm);
     }
     puts("png --> bmp");
     {
-        HBITMAP hbm = ii_png_load(_T("glasses.png"), NULL);
-        ii_bmp_save(_T("glasses-save.bmp"), hbm, 0);
+        HBITMAP hbm = ii_png_load(_T("tests/images/glasses.png"), NULL);
+        ii_bmp_save(_T("tests/images/glasses-save.bmp"), hbm, 0);
         ii_destroy(hbm);
     }
     puts("bmp --> png");
     {
-        HBITMAP hbm = ii_bmp_load(_T("lena.bmp"), NULL);
-        ii_png_save(_T("lena-save.png"), hbm, 0);
+        HBITMAP hbm = ii_bmp_load(_T("tests/images/lena.bmp"), NULL);
+        ii_png_save(_T("tests/images/lena-save.png"), hbm, 0);
         ii_destroy(hbm);
     }
 #endif
@@ -161,20 +161,20 @@ int main(void)
 #ifdef HAVE_TIFF
     puts("tiff --> tiff");
     {
-        HBITMAP hbm = ii_tif_load(_T("lena.tif"), NULL);
-        ii_tif_save(_T("lena-save.tif"), hbm, 0);
+        HBITMAP hbm = ii_tif_load(_T("tests/images/lena.tif"), NULL);
+        ii_tif_save(_T("tests/images/lena-save.tif"), hbm, 0);
         ii_destroy(hbm);
     }
     puts("tif --> bmp");
     {
-        HBITMAP hbm = ii_tif_load(_T("lena.tif"), NULL);
-        ii_bmp_save(_T("lena-save.bmp"), hbm, 0);
+        HBITMAP hbm = ii_tif_load(_T("tests/images/lena.tif"), NULL);
+        ii_bmp_save(_T("tests/images/lena-save.bmp"), hbm, 0);
         ii_destroy(hbm);
     }
     puts("bmp --> tif");
     {
-        HBITMAP hbm = ii_bmp_load(_T("lena.bmp"), NULL);
-        ii_tif_save(_T("lena-save.tif"), hbm, 0);
+        HBITMAP hbm = ii_bmp_load(_T("tests/images/lena.bmp"), NULL);
+        ii_tif_save(_T("tests/images/lena-save.tif"), hbm, 0);
         ii_destroy(hbm);
     }
 #endif
