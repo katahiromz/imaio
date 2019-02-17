@@ -127,9 +127,13 @@ target_link_libraries(imaio-dll PRIVATE
     ${PNG_LIBRARIES}
     ${TIFF_LIBRARIES})
 
-# add test program
-add_executable(imaio_test tests/imaio_test.c)
-target_link_libraries(imaio_test PRIVATE imaio)
+# add test program #1
+add_executable(imaio_test_1 tests/imaio_test.c)
+target_link_libraries(imaio_test_1 PRIVATE imaio)
+
+# add test program #2
+add_executable(imaio_test_2 tests/imaio_test.c)
+target_link_libraries(imaio_test_2 PRIVATE imaio-dll)
 
 ## add test
 #add_test(NAME imaio_test COMMAND imaio_test WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
