@@ -132,7 +132,7 @@ typedef struct II_ANIGIF_FRAME
     int                 iTransparent;   /* -1 if not transparent */
     int                 disposal;       /* gif disposal method */
     int                 delay;          /* in milliseconds */
-    II_PALETTE *        local_palette;  /* local color table */
+    II_PALETTE *        local_palette;  /* local color table (can be NULL) */
     HBITMAP             hbmPart;        /* 8bpp part image */
     HBITMAP             hbmScreen;      /* must be a 32bpp or NULL */
     void *              p_user;         /* user data pointer */
